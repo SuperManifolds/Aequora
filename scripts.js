@@ -4,17 +4,9 @@
 /* Defined in: "Textual.app -> Contents -> Resources -> JavaScript -> API -> core.js" */
 
 var mappedSelectedUsers = new Array();
-var emotes = null;
 
 Textual.viewBodyDidLoad = function() {
     Textual.fadeOutLoadingScreen(1.00, 0.95);
-
-    var emoteRequest = new XMLHttpRequest();
-    emoteRequest.open("GET", "http://twitchemotes.com/api_cache/v2/global.json", true);
-    emoteRequest.onload = function() {
-        emotes = JSON.parse(emoteRequest.responseText);
-    }
-    emoteRequest.send();
 
     window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
@@ -51,23 +43,6 @@ Textual.newMessagePostedToView = function (line) {
     var redditRegex = /http(s)?:\/\/([A-Za-z0-9_.]*)reddit.com\/r\/[A-Za-z0-9_-]*\/comments\/[A-Za-z0-9]*\/[A-Za-z0-9_]*\/[A-Za-z0-9]*/;
 
     if (innerMessage) {
-        if (emotes) {
-            var messageText = innerMessage.innerHTML;
-            messageText.split(' ').forEach(function(word) {
-                word = word.trim();
-                if (emotes.emotes[word]) {
-                    var emote = emotes.emotes[word];
-                    var emoticon = document.createElement("img");
-                    emoticon.setAttribute("alt", word);
-                    emoticon.setAttribute("src", "https://static-cdn.jtvnw.net/emoticons/v1/" + emote.image_id + "/1.0");
-                    emoticon.style.display = "inline-block";
-
-                    messageText = messageText.replace(new RegExp("\\b" + word + "\\b", "g"), emoticon.outerHTML);
-                }
-            });
-            innerMessage.innerHTML = messageText;
-        }
-
         var links = innerMessage.querySelectorAll("a");
         if (links) {
             for (var x = 0; x < links.length; x++) {
@@ -85,12 +60,10 @@ Textual.newMessagePostedToView = function (line) {
                         innerMessage.appendChild(container);
                         twttr.widgets.load();
                     }
-                    twitterRequest.send();//
+                    twitterRequest.send();
                 }
             }
         }
-
-
     }
 
     var getEmbeddedImages = message.querySelectorAll("img");
