@@ -58,7 +58,7 @@ Textual.newMessagePostedToView = function (line) {
                 if (emotes.emotes[word]) {
                     var emote = emotes.emotes[word];
                     var emoticon = document.createElement("img");
-                    emoticon.setAttribute("alt", emote);
+                    emoticon.setAttribute("alt", word);
                     emoticon.setAttribute("src", "https://static-cdn.jtvnw.net/emoticons/v1/" + emote.image_id + "/1.0");
                     emoticon.style.display = "inline-block";
 
