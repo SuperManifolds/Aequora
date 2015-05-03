@@ -113,17 +113,20 @@ function updateNicknameAssociatedWithNewMessage(e) {
 	}
 }
 
-"use strict";
 function toggleSelectionStatusForNicknameInsideElement(e) {
+    "use strict";
 	/* e is nested as the .sender so we have to go three parents
 	 up in order to reach the parent div that owns it. */
-	var parentSelector = e.parentNode.parentNode.parentNode.parentNode;
+	var parentSelector = e.parentNode;
+     for (var i = 0; i < 4; i += 1) {
+         parentSelector = parentSelector.parentNode;
+     }
 
 	parentSelector.classList.toggle("selectedUser");
 }
 
-"use strict";
 function userNicknameSingleClickEvent(e) {
+    "use strict";
 	/* This is called when the .sender is clicked. */
 	var nickname = e.getAttribute("nickname");
 	/* Toggle mapped status for nickname. */
