@@ -1,92 +1,100 @@
-/* jslint browser: true */
-/* global Textual */
+/*jslint browser: true*/
+/*global Textual, twttr */
 
 /* Defined in: "Textual.app -> Contents -> Resources -> JavaScript -> API -> core.js" */
 
-var mappedSelectedUsers = new Array();
+var mappedSelectedUsers = [];
 
-Textual.viewBodyDidLoad = function() {
+Textual.nicknameSingleClicked = function (e) {
+    "use strict";
+    this.userNicknameSingleClickEvent(e);
+}
+
+Textual.viewBodyDidLoad = function () {
+    "use strict";
     Textual.fadeOutLoadingScreen(1.00, 0.95);
 
-    window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
-
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
-
-  return t;
-}(document, "script", "twitter-wjs"));
-
-    setTimeout(function() {
+    window.twttr = (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) {
+            return t;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        t.e = [];
+        t.ready = function (f) {
+            t.e.push(f);
+        };
+        return t;
+    }(document, "script", "twitter-wjs"));
+    setTimeout(function () {
         Textual.scrollToBottomOfView();
     }, 500);
 };
 
+function resizeImage(e) {
+    "use strict";
+    setTimeout(function () {
+        if (e.target.offsetHeight > (window.innerHeight - 150)) {
+            e.target.style.height = (window.innerHeight - 150);
+        }
+    }, 1000);
+}
+
 Textual.newMessagePostedToView = function (line) {
-    var message = document.getElementById('line-' + line);
-    var innerMessage = message.querySelector(".innerMessage");
+    "use strict";
+    var message, innerMessage, twitterRegex, x, link, links, twitterMatch, requestUrl, twitterRequest, getEmbeddedImages, i, len;
+
+    function twitterWidgetLoaded() {
+        var container = document.createElement("div");
+        container.innerHTML = JSON.parse(twitterRequest.responseText).html;
+
+        innerMessage.appendChild(container);
+        twttr.widgets.load();
+    }
+
+    message = document.getElementById('line-' + line);
+    innerMessage = message.querySelector(".innerMessage");
     if (message.getAttribute("encrypted") === "true") {
         if (innerMessage.innerText.indexOf("+OK") !== -1) {
             message.setAttribute("encrypted", "failed");
         }
     }
 
-    var twitterRegex = /http(s)?:\/\/(www.)?twitter.com\/[A-Za-z0-9_-]*\/status\/([0-9]*)/;
-    var redditRegex = /http(s)?:\/\/([A-Za-z0-9_.]*)reddit.com\/r\/[A-Za-z0-9_-]*\/comments\/[A-Za-z0-9]*\/[A-Za-z0-9_]*\/[A-Za-z0-9]*/;
+    twitterRegex = /http(s)?:\/\/(www\.)?twitter\.com\/[A-Za-z0-9_\-]*\/status\/([0-9]*)/;
 
     if (innerMessage) {
-        var links = innerMessage.querySelectorAll("a");
+        links = innerMessage.querySelectorAll("a");
         if (links) {
-            for (var x = 0; x < links.length; x++) {
-                var link = links[x].getAttribute("href");
+            for (x = 0; x < links.length; x += 1) {
+                link = links[x].getAttribute("href");
 
-                var twitterMatch = twitterRegex.exec(link);
-                if (twitterMatch != null) {
-                    var requestUrl = "https://api.twitter.com/1/statuses/oembed.json?id=" + twitterMatch[3] + "&url=" + encodeURIComponent(twitterMatch[0]) + "&hide_thread=true&omit_script=true&theme=dark";
-                    var twitterRequest = new XMLHttpRequest();
+                twitterMatch = twitterRegex.exec(link);
+                if (twitterMatch !== null) {
+                    requestUrl = "https://api.twitter.com/1/statuses/oembed.json?id=" + twitterMatch[3] + "&url=" + encodeURIComponent(twitterMatch[0]) + "&hide_thread=true&omit_script=true&theme=dark";
+                    twitterRequest = new XMLHttpRequest();
                     twitterRequest.open("GET", requestUrl, true);
-                    twitterRequest.onload = function() {
-                        var container = document.createElement("div");
-                        container.innerHTML = JSON.parse(twitterRequest.responseText).html;
-
-                        innerMessage.appendChild(container);
-                        twttr.widgets.load();
-                    }
+                    twitterRequest.onload = twitterWidgetLoaded;
                     twitterRequest.send();
                 }
             }
         }
     }
 
-    var getEmbeddedImages = message.querySelectorAll("img");
+    getEmbeddedImages = message.querySelectorAll("img");
     if (getEmbeddedImages) {
-        for (var i = 0, len = getEmbeddedImages.length; i < len; i++) {
-            getEmbeddedImages[i].onload = function(e) {
-                setTimeout(function() {
-                    if (e.target.offsetHeight > (window.innerHeight - 150)) {
-                        e.target.style.height = (window.innerHeight - 150);
-                    }
-                }, 1000);
-            }
+        for (i = 0, len = getEmbeddedImages.length; i < len; i += 1) {
+            getEmbeddedImages[i].onload = resizeImage;
         }
     }
-    updateNicknameAssociatedWithNewMessage(message);
+    window.updateNicknameAssociatedWithNewMessage(message);
 };
 
-Textual.nicknameSingleClicked = function(e) {
-    userNicknameSingleClickEvent(e);
-}
-
-
 function updateNicknameAssociatedWithNewMessage(e) {
+    "use strict";
 	/* We only want to target plain text messages. */
 	var elementType = e.getAttribute("ltype");
     var acceptedElementTypes = ["privmsg", "action", "notice"];
@@ -105,6 +113,7 @@ function updateNicknameAssociatedWithNewMessage(e) {
 	}
 }
 
+"use strict";
 function toggleSelectionStatusForNicknameInsideElement(e) {
 	/* e is nested as the .sender so we have to go three parents
 	 up in order to reach the parent div that owns it. */
@@ -113,6 +122,7 @@ function toggleSelectionStatusForNicknameInsideElement(e) {
 	parentSelector.classList.toggle("selectedUser");
 }
 
+"use strict";
 function userNicknameSingleClickEvent(e) {
 	/* This is called when the .sender is clicked. */
 	var nickname = e.getAttribute("nickname");
