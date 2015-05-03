@@ -4,6 +4,7 @@
 	margin: 0;
 	padding: 0;
 	font-size: 100%;
+	word-break: break-word;
 	-webkit-word-break: break-word;
 	word-wrap: break-word;
 }
@@ -36,6 +37,7 @@ p {
 	max-height: 99.99%;
 	opacity: 0; /* Set by JavaScript */
 	-webkit-transition: opacity 0.8s linear;
+	transition: opacity 0.8s linear;
 }
 
 #body_home {
@@ -67,6 +69,7 @@ body[dir=rtl] .senderContainer {
 	padding-left: 10px;
 	opacity: 1; /* Set by JavaScript */
 	-webkit-transition: opacity 0.8s linear;
+	transition: opacity 0.8s linear;
 }
 
 #loading_screen progress {
@@ -80,14 +83,11 @@ body[dir=ltr] .time {
 	float: right;
 	color: #667c8e;
 	-webkit-user-select: none;
+	user-select: none;
 	margin-right: 10px;
 	line-height: 22px;
 	font-style: normal;
 	text-align: right;
-}
-
-/* Encryption Lock */
-.encryptionLock {
 }
 
 .encryptionLock img {
@@ -179,7 +179,6 @@ body img {
 
 .inlineImageCell .image {
 	display: inline-block;
-	float: left;
 	margin: 15px 15px 12px 10px;
 	min-width: 100px;
 }
@@ -213,6 +212,7 @@ div[id=mark] {
 	border-bottom: 1px solid;
 	border-color: #3e5369;
 	-webkit-transition: 0.2s linear;
+	transition: 0.2s linear;
 }
 
 body[dir=ltr] div[ltype=action] .sender:before {
