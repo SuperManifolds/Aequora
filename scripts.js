@@ -118,7 +118,7 @@ function toggleSelectionStatusForNicknameInsideElement(e) {
 	/* e is nested as the .sender so we have to go three parents
 	 up in order to reach the parent div that owns it. */
 	var parentSelector = e.parentNode;
-    for (var i = 0; i < 4; i += 1) {
+    for (var i = 0; i < 3; i += 1) {
         parentSelector = parentSelector.parentNode;
      }
 
