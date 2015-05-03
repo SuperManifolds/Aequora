@@ -4,6 +4,7 @@
 /* Defined in: "Textual.app -> Contents -> Resources -> JavaScript -> API -> core.js" */
 
 var mappedSelectedUsers = [];
+var previousNick = '', previousNickCount = 1, previousNickMessageId, previousNickDelete = false;
 
 Textual.nicknameSingleClicked = function (e) {
     "use strict";
@@ -47,6 +48,7 @@ function resizeImage(e) {
 Textual.newMessagePostedToView = function (line) {
     "use strict";
     var message, innerMessage, twitterRegex, x, link, links, twitterMatch, requestUrl, twitterRequest, getEmbeddedImages, i, len;
+    var selectNick;
 
     function twitterWidgetLoaded() {
         var container = document.createElement("div");
@@ -58,11 +60,38 @@ Textual.newMessagePostedToView = function (line) {
 
     message = document.getElementById('line-' + line);
     innerMessage = message.querySelector(".innerMessage");
+    
     if (message.getAttribute("encrypted") === "true") {
         if (innerMessage.innerText.indexOf("+OK") !== -1) {
             message.setAttribute("encrypted", "failed");
         }
     }
+    
+    /* The following is the intellectual property of April King, see LICENSE.md for more information */
+    
+    if (message.getAttribute('ltype') === 'privmsg' || message.getAttribute('ltype') === 'action') {
+        selectNick = message.querySelector(".sender");
+    
+        // Delete the previous line's nick, if it was set to be deleted
+        if (previousNickDelete === true) {
+            document.getElementById(previousNickMessageId).getElementsByClassName('sender')[0].style.visibility = 'hidden';
+        }
+    
+        // Track the nicks that submit messages, so that we can space out everything
+        if ((previousNick === selectNick.innerHTML) && (previousNickCount < 10) && (message.getAttribute('ltype') !== 'action')) {
+            previousNickDelete = true;
+            previousNickCount += 1;
+        } else {
+            previousNick = selectNick.innerHTML;
+            previousNickCount = 1;
+            previousNickDelete = false;
+        }
+    
+        // Track the previous message's id
+        previousNickMessageId = message.getAttribute('id');
+    }
+    
+    /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
     twitterRegex = /http(s)?:\/\/(www\.)?twitter\.com\/[A-Za-z0-9_\-]*\/status\/([0-9]*)/;
 
