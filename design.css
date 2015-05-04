@@ -20,8 +20,8 @@ body {
 }
 
 body .f {
-	-webkit-transition: color 1s;
-	-transition: color 1s;
+	-webkit-transition: color .75s;
+	-transition: color .75s;
 }
 
 p {
