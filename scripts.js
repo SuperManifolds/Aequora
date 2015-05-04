@@ -69,6 +69,12 @@ Textual.newMessagePostedToView = function (line) {
     
     /* The following is the intellectual property of April King, see LICENSE.md for more information */
     
+    // reset the message count and previous nick, when you rejoin a channel
+    if (message.getAttribute('ltype') !== 'privmsg') {
+        previousNick = '';
+        previousNickCount = 1;
+    }
+    
     if (message.getAttribute('ltype') === 'privmsg' || message.getAttribute('ltype') === 'action') {
         selectNick = message.querySelector(".sender");
     
