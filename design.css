@@ -19,6 +19,11 @@ body {
 	overflow-y: visible;
 }
 
+body .f {
+	-webkit-transition: color 1s;
+	-transition: color 1s;
+}
+
 p {
 	overflow: visible !important;
 }

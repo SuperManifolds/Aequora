@@ -48,7 +48,7 @@ function resizeImage(e) {
 Textual.newMessagePostedToView = function (line) {
     "use strict";
     var message, innerMessage, twitterRegex, x, link, links, twitterMatch, requestUrl, twitterRequest, getEmbeddedImages, i, len;
-    var selectNick;
+    var selectNick, nickElement;
 
     function twitterWidgetLoaded() {
         var container = document.createElement("div");
@@ -80,7 +80,9 @@ Textual.newMessagePostedToView = function (line) {
     
         // Delete the previous line's nick, if it was set to be deleted
         if (previousNickDelete === true) {
-            document.getElementById(previousNickMessageId).getElementsByClassName('sender')[0].style.visibility = 'hidden';
+            nickElement = document.getElementById(previousNickMessageId).getElementsByClassName('sender')[0];
+            nickElement.classList.add("f");
+            nickElement.style.color = window.getComputedStyle(nickElement).backgroundColor;
         }
     
         // Track the nicks that submit messages, so that we can space out everything
