@@ -1,7 +1,7 @@
 # Aequora-Textual-Style-
 Style/theme for the Textual IRC Client (version 5 and above)
    
- ![Preview Image](http://alex.systems/Q0oEz.png)   
+ ![Preview Image](http://sorlie.co.uk/Q0oEz.png)   
     
 ##Install Instructions (Local):  
 1. Download the the theme by clicking the "Download Zip" button on the right-hand side.  
