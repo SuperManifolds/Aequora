@@ -1,4 +1,4 @@
-Copyright (c) 2015, April King, Alex Sørlie Glomsaas.
+Copyright (c) 2015, April King, Alex S. Glomsaas.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -11,7 +11,7 @@ are permitted provided that the following conditions are met:
   list of conditions and the following disclaimer in the documentation and/or
   other materials provided with the distribution.
 
-* Neither the name of Alex Sørlie Glomsaas nor the names of its
+* Neither the name of the contributors nor the names of its
   contributors may be used to endorse or promote products derived from
   this software without specific prior written permission.
 
@@ -27,7 +27,3 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ————————————————————————————————————————————————————————————————————————————
-
-Specific components of this distributable is created and contributed by April King (https://github.com/marumari)   
-They are also distributed under the BSD license but must be attributed to them, not the original creator of this project.   
-The components are clearly designated in the source code.
