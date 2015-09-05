@@ -26,8 +26,12 @@ var NickColorGenerator = (function () {
 
     //Start alternative nick colouring procedure
     var selectNick = message.querySelector('.sender');
+    
     selectNick.removeAttribute('colornumber');
     var nickcolor = this.generateColorFromHash(selectNick.getAttribute('nickname'));
+    if (selectNick.getAttribute("mtype") === "myself") {
+      nickcolor = "#bdabf2";
+    }
 
     selectNick.style.color = nickcolor;
 
