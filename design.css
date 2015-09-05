@@ -79,7 +79,7 @@ body[dir=ltr] .time {
   font-size: .91em !important;
   white-space: nowrap;
   float: right;
-  color: #999;
+  color: #8ba4cf;
   -webkit-user-select: none;
   /*  font-weight: bold; */
   margin-right: 10px;
@@ -87,10 +87,6 @@ body[dir=ltr] .time {
   line-height: 22px;
   font-style: normal;
   text-align: right;
-}
-
-/* Encryption Lock */
-.encryptionLock {
 }
 
 .encryptionLock img {
@@ -156,15 +152,9 @@ a:hover {
   box-shadow: 0 1px 5px #777;
   border-top: 1px solid #404040;
   text-shadow: 1px 1px rgba(10, 10, 10, 0.7);
-  background: rgba(31, 51, 81, 0.95);
   display: none;
   overflow: hidden;
 }
-
-#scrolling_history .senderContainer {
-  background: #20262b
-}
-
 
 /* Images */
 
@@ -238,7 +228,7 @@ body[dir=ltr] div[ltype=action] .sender:before {
 /* Historic / Log readback */
 #historic_messages,
 #body_home > .historic {
-  opacity: 0.83;
+  -webkit-filter: brightness(75%) saturate(50%)
 }
 
 /* NOTICE/CTCP/WALLOPS */
@@ -250,14 +240,12 @@ body div.line[ltype=wallops] {
   border-bottom: none;
   border-top: none;
   border-left: none;
-  background-color: #1d2734;
 }
 
 body div[ltype=ctcp] .senderContainer,
 body div[ltype=notice] .senderContainer {
   color: #f00;
   font-weight: 700;
-  min-height:23px;
   width: 134px;
   padding-right:7px;
   text-align:right;
@@ -268,7 +256,6 @@ body div[ltype=notice] .senderContainer {
   bottom: 0;
   left: 0;
   text-overflow: ellipsis;
-  background-color: #161616;
 }
 
 body div[ltype=notice] .message {
@@ -279,16 +266,15 @@ body div[ltype=notice] .message {
 body div.line[ltype=privmsg][highlight=false] {
   padding: 0;
   position: relative;
-  min-height: 23px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 body div[ltype=privmsg] .senderContainer {
   /*  font-weight: 700; */
-  min-height:23px;
   width: 134px;
   border-right: 1px solid rgb(64, 64, 64);
   padding-right:7px;
-  background-color: #20262b;
   text-align:right;
   display:inline-block;
   overflow: hidden;
@@ -339,7 +325,6 @@ body div[ltype=action] .senderContainer {
   /*  font-weight: 700;*/
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  background-color: #1d1d1d;
   height:22px;
   padding-right: 7px;
   text-align:right;
@@ -430,9 +415,7 @@ body span.message {
 }
 
 body div.event span.time {
-  color: #999;
-  line-height: 19px;
-  display: table-cell;
+  display: none;
 }
 
 body div.event span.message {
@@ -455,7 +438,6 @@ body div.line[ltype=website] {
   min-height: 19px;
   padding-left: 145px;
   color: #8ba4cf;
-  background: #20262b;
 }
 
 body div.line[ltype=topic] span.message {
@@ -521,10 +503,6 @@ body .inline_nickname {
 }
 */
 
-body .sender[mtype=myself] {
-  color: #9A60FF;
-}
-
 body .sender {
   margin-right: -.25em;
 
@@ -571,5 +549,6 @@ body div.line[ltype=action][highlight=true] {
   z-index: 191;
   position: relative;
   font-weight: normal;
-  background-color: #30473a;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
