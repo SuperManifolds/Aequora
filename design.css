@@ -13,7 +13,8 @@ body {
   z-index: 100;
   font-size: 12px;
   background-color: #20262b;
-  font-family: "Helvetica Neue";
+  font-family: system, -apple-system,
+      ".SFNSDisplay-Regular", "Helvetica Neue", "Lucida Grande";
   font-weight: 200;
   overflow-y: visible;
 }
