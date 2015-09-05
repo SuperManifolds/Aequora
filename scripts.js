@@ -232,21 +232,6 @@ Textual.newMessagePostedToView = function (line) {
 
     // Track the previous message's id
     rs.previousNickMessageId = message.getAttribute('id');
-
-    // Copy the message into the hidden history
-    clone = message.cloneNode(true);
-    clone.removeAttribute('id');
-    rs.history.appendChild(clone);
-
-    // Remove old messages, if the history is longer than three messages
-    if (rs.history.childElementCount > 2) {
-      rs.history.removeChild(rs.history.childNodes[0]);
-
-      // Hide the first nick in the hidden history, if it's the same as the second
-      if ((rs.previousNickCount > 1) && (message.getAttribute('ltype') !== 'action')) {
-        rs.history.getElementsByClassName('sender')[0].style.visibility = 'hidden';
-      }
-    }
   }
 
   /* Let's kill topics that appear where they had already been set before
