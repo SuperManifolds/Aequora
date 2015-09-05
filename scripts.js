@@ -343,25 +343,3 @@ Textual.viewBodyDidLoad = function () {
     Textual.scrollToBottomOfView();
   }, 500);
 };
-
-Textual.viewInitiated = function () {
-  'use strict';
-
-  /* When the view is loaded, create a hidden history div which we display if there is scrollback */
-  var body = document.getElementById('body_home'), div = document.createElement('div');
-  div.id = 'scrolling_history';
-  document.getElementsByTagName('body')[0].appendChild(div);
-  rs.history = div;
-
-  /* setup the scrolling event to display the hidden history if the bottom element isn't in the viewport
-     also hide the topic bar when scrolling */
-  window.onscroll = function () {
-    if (isMessageInViewport(body.childNodes[body.childElementCount - 1]) === false) { // scrollback
-      rs.history.style.display = 'inline';
-      document.getElementById('topic_bar').style.visibility = 'hidden';
-    } else {
-      rs.history.style.display = 'none'; // at the bottom
-      document.getElementById('topic_bar').style.visibility = 'visible';
-    }
-  };
-};
