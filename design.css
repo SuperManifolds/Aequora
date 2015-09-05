@@ -9,13 +9,13 @@
 }
 
 body {
-  color: #f2f2f2;
+  color: #fff;
   z-index: 100;
   font-size: 12px;
   background-color: #20262b;
   font-family: system, -apple-system,
       ".SFNSDisplay-Regular", "Helvetica Neue", "Lucida Grande";
-  font-weight: 200;
+  font-weight: 400;
   overflow-y: visible;
 }
 
@@ -472,7 +472,6 @@ body div.line[ltype=kick] {
 
 body[dir=ltr] div[ltype=join] .message:before {
   content: "→";
-  color: #0c0;
   margin-left:3px;
   margin-right: 5px;
 }
@@ -482,14 +481,12 @@ body[dir=ltr] div[ltype=kick] .message:before,
 body[dir=ltr] div[ltype=part] .message:before,
 body[dir=ltr] div[ltype=quit] .message:before {
   content: "←";
-  color: #e00;
   margin-left:3px;
   margin-right: 5px;
 }
 
 body[dir=ltr] div[ltype=nick] .message:before {
   content: "\2022";
-  color: #37be34;
   font-weight: 700;
   margin-left: 8px;
   margin-right: 5px;
@@ -497,7 +494,6 @@ body[dir=ltr] div[ltype=nick] .message:before {
 
 body[dir=ltr] div[ltype=mode] .message:before {
   content: "\2022";
-  color: #2cb6f6;
   font-weight: 700;
   margin-left: 8px;
   margin-right: 5px;
@@ -505,7 +501,6 @@ body[dir=ltr] div[ltype=mode] .message:before {
 
 body[dir=rtl] div[ltype=join] .message:before {
   content: "→";
-  color: #0c0;
   margin-left:3px;
   margin-right: 5px;
 }
@@ -514,7 +509,6 @@ body[dir=rtl] div[ltype=kick] .message:before,
 body[dir=rtl] div[ltype=part] .message:before,
 body[dir=rtl] div[ltype=quit] .message:before {
   content: "←";
-  color: #e00;
   margin-left:3px;
   margin-right: 5px;
 }
